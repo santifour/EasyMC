@@ -117,6 +117,8 @@ Minecraft is a trademark of Mojang Studios.
 Found a bug?  
 Have a feature idea?
 
+Contact me - santidadandres@gmail.com
+
 Open an issue or a pull request — contributions are welcome ❤️
 
 ---
