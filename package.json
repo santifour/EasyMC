@@ -1,0 +1,33 @@
+{
+  "name": "easy-mc-server",
+  "version": "1.0.0",
+  "description": "Easy Minecraft Server Installer",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "start": "npm run build && set ELECTRON_RUN_AS_NODE=&& electron .",
+    "build": "tsc && xcopy /E /I /Y src\\renderer dist\\renderer",
+    "pack": "npm run build && npx electron-packager . EasyMCServer --platform=win32 --arch=x64 --out=FinalBuild --overwrite --ignore=\"^/src\" --ignore=\"^/tsconfig.json\" --ignore=\"^/ARCHITECTURE.md\" --ignore=\"^/README_DEV.md\""
+  },
+  "build": {
+    "appId": "com.easymc.server",
+    "win": {
+      "target": "dir",
+      "icon": "resources/icon.ico"
+    },
+    "files": [
+      "dist/**/*",
+      "src/renderer/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.2",
+    "electron": "^26.6.10",
+    "electron-builder": "^26.7.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}

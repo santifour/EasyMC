@@ -1,0 +1,273 @@
+<!--
+ Copyright (c) 2026 Santi
+ Licensed under AGPL-3.0
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyMC PRO Control Panel</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- CUSTOM TITLE BAR -->
+  <header class="title-bar">
+    <div class="drag-region">
+      <span class="app-title-mini">EasyMC Control Panel</span>
+    </div>
+    <button id="lang-toggle" class="lang-btn" title="Dili Değiştir / Change Language">
+      <img id="lang-icon" src="assets/turkish.png" alt="TR">
+    </button>
+    <div class="window-controls">
+      <button id="win-min" class="win-btn" title="Küçült">⚊</button>
+      <button id="win-max" class="win-btn" title="Tam Ekran">▢</button>
+      <button id="win-close" class="win-btn close" title="Kapat">✕</button>
+    </div>
+  </header>
+
+  <div class="app-window">
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <div class="sidebar-content">
+        <div class="sidebar-section">
+          <span class="section-title" id="t-my-servers">SUNUCULARIM</span>
+          <ul id="server-list" class="server-nav">
+            <!-- Dynamically populated -->
+          </ul>
+          <button id="nav-create-btn" class="add-server-btn">+ Yeni Sunucu Kur</button>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="app-info">
+          <div class="version-row">
+            <span>V2.0.0 PRO</span>
+            <span class="status-dot"></span>
+          </div>
+          <span class="author-tag">by Santi</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- 1. CREATE VIEW -->
+      <section id="create-view" class="view hidden">
+        <div class="view-header">
+          <h1>Yeni Sunucu Sihirbazı</h1>
+          <p>Minecraft sunucunuzu dakikalar içinde hazırlayın.</p>
+        </div>
+
+        <div class="card setup-card">
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Sunucu Adı</label>
+              <input type="text" id="setup-name" placeholder="Örn: My Epic Server">
+            </div>
+            <div class="form-group">
+              <label>Sunucu Tipi</label>
+              <select id="setup-type">
+                <option value="VANILLA">Vanilla (Düz)</option>
+                <option value="FORGE">Forge (Modlu)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Versiyon</label>
+              <select id="setup-version">
+                <option disabled selected>Yükleniyor...</option>
+              </select>
+            </div>
+            <div id="setup-forge-group" class="form-group full-width hidden">
+              <label>Forge Build Seçimi</label>
+              <select id="setup-forge-build"></select>
+            </div>
+            <div class="form-group full-width">
+              <label>Hamachi IPv4 Adresi</label>
+              <input type="text" id="setup-ip" placeholder="Örn: 25.43.12.99">
+            </div>
+          </div>
+          <button id="do-install-btn" class="btn primary-btn large full-width">Kurulumu Başlat</button>
+        </div>
+
+        <div id="install-progress-card" class="card hidden mt-20">
+          <div class="progress-info">
+            <span id="install-step-text">İşlem bekleniyor...</span>
+            <span id="install-percent">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div id="install-bar-fill"></div>
+          </div>
+          <div class="mini-console" id="install-logs"></div>
+        </div>
+      </section>
+
+      <!-- 2. CONTROL VIEW -->
+      <section id="control-view" class="view">
+        <div class="view-header-row">
+          <div class="title-group">
+            <h1 id="active-server-display-name">Sunucu Seçin</h1>
+            <div class="server-status-badge" id="status-badge">
+              <span class="status-indicator"></span>
+              <span id="status-text">KAPALI</span>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button id="btn-start" class="btn success-btn">▶ Sunucuyu Başlat</button>
+            <button id="btn-stop" class="btn danger-btn hidden">⏹ Sunucuyu Durdur</button>
+            <button id="btn-restart" class="btn warn-btn hidden">🔄 Yeniden Başlat</button>
+            <button id="btn-open-folder" class="btn icon-btn" title="Dosya Gezgini">📂</button>
+          </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tab-nav">
+          <button class="tab-btn active" data-tab="tab-dashboard">Dashboard</button>
+          <button class="tab-btn" data-tab="tab-console">Konsol</button>
+          <button class="tab-btn" data-tab="tab-commands">Komutlar</button>
+          <button class="tab-btn" data-tab="tab-settings">Ayarlar</button>
+          <button class="tab-btn" data-tab="tab-backups">Yedekler</button>
+          <button class="tab-btn" data-tab="tab-mods">Modlar</button>
+        </div>
+
+        <div class="tab-container">
+          <!-- DASHBOARD -->
+          <div id="tab-dashboard" class="tab-content active">
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span class="stat-label">OYUNCULAR</span>
+                <span class="stat-value" id="stat-players">0 / --</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">UPTIME</span>
+                <span class="stat-value" id="stat-uptime">00:00:00</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">SUNUCU ADRESİ</span>
+                <div class="copy-box">
+                  <span id="stat-ip">--.--.--.--</span>
+                  <button id="btn-copy-ip" class="copy-btn">📋</button>
+                </div>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">PİNG</span>
+                <span class="stat-value" id="stat-ping">-- ms</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">KAYNAK KULLANIMI</span>
+                <span class="stat-value" id="stat-ram">0 MB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONSOLE -->
+          <div id="tab-console" class="tab-content">
+            <div class="console-wrapper">
+              <div id="main-console" class="console-output"></div>
+              <div class="console-input-row">
+                <span class="prompt">></span>
+                <input type="text" id="console-input" placeholder="Sunucu komutu gönder...">
+              </div>
+            </div>
+          </div>
+
+          <!-- COMMANDS QUICK ACTIONS -->
+          <div id="tab-commands" class="tab-content">
+            <div class="commands-view">
+              <div class="commands-category">
+                <h3 class="cmd-cat-title">🛡️ Sunucu Yönetimi</h3>
+                <div id="cmd-list-mgmt" class="cmd-grid"></div>
+              </div>
+              <div class="commands-category">
+                <h3 class="cmd-cat-title">👥 Oyuncu Kontrolü</h3>
+                <div id="cmd-list-players" class="cmd-grid"></div>
+              </div>
+              <div class="commands-category">
+                <h3 class="cmd-cat-title">🌍 Dünya & Oyun Ayarları</h3>
+                <div id="cmd-list-world" class="cmd-grid"></div>
+              </div>
+              <div class="commands-category">
+                <h3 class="cmd-cat-title">📊 Bilgi & Durum</h3>
+                <div id="cmd-list-info" class="cmd-grid"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SETTINGS -->
+          <div id="tab-settings" class="tab-content">
+            <div class="settings-layout">
+              <div class="settings-sidebar">
+                <button class="set-nav-btn active" data-set="GENEL">⚙️ Genel</button>
+                <button class="set-nav-btn" data-set="OYUN">🎮 Oyun</button>
+                <button class="set-nav-btn" data-set="DUNYA">🌍 Dünya</button>
+                <button class="set-nav-btn" data-set="PERFORMANS">⚡ Performans</button>
+                <button class="set-nav-btn" data-set="GUVENLIK">🔐 Güvenlik</button>
+                <button class="set-nav-btn" data-set="GELISMIS">🧠 Gelişmiş</button>
+                <button class="set-nav-btn" data-set="OTOMASYON">🤖 Otomasyon</button>
+              </div>
+              <div class="settings-forms">
+                <!-- ICON SELECTOR -->
+                <div id="icon-selector-container" class="icon-selector hidden">
+                  <span class="prop-title">🖼️ Sunucu Logosu (64x64 PNG)</span>
+                  <div class="icon-ui-row">
+                    <div id="icon-preview-box" class="icon-preview">
+                      <img id="img-icon-preview" src="" alt="">
+                      <span id="icon-placeholder">64x64</span>
+                    </div>
+                    <div class="icon-controls">
+                      <button id="btn-select-logo" class="btn primary-btn small">Logo Seç</button>
+                      <button id="btn-remove-logo" class="btn danger-btn small">Logoyu Kaldır</button>
+                      <input type="file" id="input-logo-file" accept="image/png, image/jpeg, image/jpg"
+                        style="display:none;">
+                    </div>
+                  </div>
+                </div>
+
+                <div id="properties-form" class="props-container"></div>
+                <div class="form-actions sticky-bottom">
+                  <button id="btn-save-props" class="btn primary-btn large">Değişiklikleri Kaydet</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BACKUPS -->
+          <div id="tab-backups" class="tab-content">
+            <div class="backup-view">
+              <div class="backup-header">
+                <span class="section-desc">Sunucunuzun yedeğini alarak veri kaybını önleyebilirsiniz.</span>
+                <button id="btn-create-backup" class="btn primary-btn">➕ Yedek Oluştur</button>
+              </div>
+              <div id="backup-list" class="backup-list"></div>
+            </div>
+          </div>
+
+          <!-- MODS -->
+          <div id="tab-mods" class="tab-content">
+            <div id="mods-list-container">
+              <div class="mod-header">
+                <h3>Yüklü Modlar</h3>
+                <button id="btn-add-mod" class="btn small primary-btn">+ Mod Yükle (.jar)</button>
+              </div>
+              <div id="mods-list" class="mods-grid"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="renderer.js"></script>
+</body>
+
+</html>
