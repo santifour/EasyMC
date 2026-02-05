@@ -21,7 +21,7 @@ Whether you’re spinning up a quick **Vanilla server** to play with friends or 
 👉 **Download the latest version here:**  
 🔗 **[EasyMCServer Setup](../../releases/latest) Recommended⭐** 
 
-🔗 **[EasyMCServer Portable]([../../releases/portable](https://github.com/santifour/EasyMCServer/releases/download/portable/EasyMCServer.Portable.zip))**
+🔗 **[EasyMCServer Portable](../../releases/portable](https://github.com/santifour/EasyMCServer/releases/download/portable/EasyMCServer.Portable.zip))**
 
 > ☕ Requires **Java 17 or higher**
 
