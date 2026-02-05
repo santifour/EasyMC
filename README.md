@@ -12,7 +12,8 @@ Whether you’re spinning up a quick **Vanilla server** to play with friends or 
 <img width="360" height="360" alt="resim" src="https://github.com/user-attachments/assets/c83d0bc0-6af8-436d-8433-b89c9e4e3406" />
 <img width="360" height="360" alt="resim" src="https://github.com/user-attachments/assets/9bb02ce7-4e1e-491e-8d7a-b5e7c3143b9b" />
 <img width="360" height="360" alt="resim" src="https://github.com/user-attachments/assets/1df5bfd8-1962-47cd-bb93-1f02d4873a28" />
-<img width="360" height="360" alt="resim" src="https://github.com/user-attachments/assets/5ba6cd82-34d0-4318-8644-15d4ebe4bbe8" />
+<img width="360" height="360" alt="resim" src="https://github.com/user-attachments/assets/b2b9bfdb-7c38-4f58-9d44-11ae0de383e0" />
+
 
 ---
 
