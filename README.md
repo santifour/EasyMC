@@ -1,10 +1,10 @@
 <p align="center">
-  <a href="#english🇬🇧">English 🇬🇧</a> | 
-  <a href="#türkçe🇹🇷">Türkçe 🇹🇷</a>
+  <a href="#english">English</a> | 
+  <a href="#türkçe">Türkçe</a>
 </p>
 
-## English🇬🇧
-
+## English
+🇬🇧
 # 🎮 EasyMCServer v2.0  
 ## The Ultimate Minecraft Server Control Panel
 
@@ -180,8 +180,8 @@ Please contact us for any problems/suggestions
 
 ---
 
-## Türkçe🇹🇷
-
+## Türkçe
+🇹🇷
 ---
 
 # 🎮 EasyMCServer v2.0
