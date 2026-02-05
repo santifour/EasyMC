@@ -28,7 +28,7 @@ Whether you’re spinning up a quick **Vanilla server** to play with friends or 
 
 👉 **Download the latest version here:**  
 
-🔗 **[EasyMCServer](https://github.com/santifour/EasyMCServer/releases/download/portable/EasyMCServer.Portable.zip)**
+🔗 **[EasyMCServer](https://github.com/santifour/EasyMCServer/releases/download/release/EasyMCServer.zip)**
 
 > ☕ Requires **Java 17 or higher**
 
@@ -206,7 +206,7 @@ Sen sadece asıl önemli şeye odaklan: **Minecraft oynamaya**.
 
 👉 **En güncel sürümü buradan indir:**
 
-🔗 **[EasyMCServer](https://github.com/santifour/EasyMCServer/releases/download/portable/EasyMCServer.Portable.zip)**
+🔗 **[EasyMCServer](https://github.com/santifour/EasyMCServer/releases/download/release/EasyMCServer.zip)**
 
 > ☕ **Java 17 veya üzeri gerektirir**
 
