@@ -19,7 +19,7 @@ Whether you’re spinning up a quick **Vanilla server** to play with friends or 
 ## 📦 Download
 
 👉 **Download the latest version here:**  
-🔗 **[EasyMCServer Setup]RECOMMENDED⭐(../../releases/latest)**
+🔗 **[EasyMCServer Setup](../../releases/latest) RECOMMENDED⭐** 
 
 🔗 **[EasyMCServer Portable](../../releases/latest)**
 
